@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "test": "echo \"Error: get it together and start testing\" && exit 1",
+    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
+    "start": "npm run build && node dist/bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -14,5 +16,10 @@
     "morgan": "~1.9.0",
     "serve-favicon": "~2.4.5",
     "twit": "^2.2.9"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "rimraf": "^2.6.2"
   }
 }
