@@ -3,20 +3,20 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: get it together and start testing\" && exit 1",
+    "test": "./node_modules/.bin/mocha --compilers js:babel-core/register --reporter spec",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "start": "npm run build && node dist/bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
     "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "jade": "~1.11.0",
     "mocha": "^4.0.1",
     "morgan": "~1.9.0",
-    "request": "^2.83.0",
     "serve-favicon": "~2.4.5",
     "twit": "^2.2.9"
   },
