@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register --reporter spec",
-    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "start": "npm run build && node dist/bin/www"
+    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log,./client --copy-files",
+    "start": "npm run build && PORT=3001 node dist/bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
