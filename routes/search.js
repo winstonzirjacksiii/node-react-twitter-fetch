@@ -2,8 +2,8 @@ import express from 'express';
 import Twit from 'twit';
 import config from '../config';
 
-let router = express.Router();
-let Twitstance = new Twit(config);
+const router = express.Router();
+const Twitstance = new Twit(config);
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'In Search' });                
