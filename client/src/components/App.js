@@ -13,11 +13,10 @@ class App extends Component {
   }
 
   searchForTweets(term){
-    fetch('/search/'+ term)
+    return fetch('/search/'+ term)
     .then((res) => res.json())
     .then((resObj) => {
       const newState = Object.assign({}, this.state.tweets, {[term]: resObj.statuses});
-      debugger;
       this.setState({ tweets: newState });
     });
   }
@@ -26,7 +25,10 @@ class App extends Component {
     const keys = Object.keys(this.state.tweets);
     let tweetContainers = [];
     if ( keys.length ) {
-      tweetContainers = keys.map((x, i) => <TweetsContainer key={i} term={x} tweets={this.state.tweets[x]} />);
+      tweetContainers = keys.map((x, i) => <TweetsContainer key={i} 
+                                                            term={x} 
+                                                            tweets={this.state.tweets[x]} 
+                                                            preview={this.state.tweets[x][0]} />);
     }
     return (
       <div className="App">

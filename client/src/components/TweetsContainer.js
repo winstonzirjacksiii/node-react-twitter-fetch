@@ -18,7 +18,7 @@ class TweetContainer extends Component {
   }
 
   render() {
-    const { term } = this.props;
+    const { term, preview } = this.props;
     const tweets = this.props.tweets.map((tweet) => {
       const { id, text, user  } = tweet;
       return <Tweet key={tweet.id } id={id} text={text} user={user} />;
@@ -26,10 +26,13 @@ class TweetContainer extends Component {
     const isVisible = this.state.open ? ' is-open' : ' is-closed';
 
     return (
-      <aside className={"m-tweets-container" + isVisible}>
-        <div className="m-tweets-container--toggler"
+      <aside className={"m-tweets-container" + isVisible}
              onClick={this.toggleOpen.bind(this)}>
+        <div className="m-tweets-container--toggler">
             { term }
+        </div>
+        <div className={"m-tweets-container--preview"}>
+          <b>{ preview.user_name}:</b> {preview.text}
         </div>
         <div className="m-tweets-container--content">
           { tweets }

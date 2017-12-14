@@ -1,6 +1,8 @@
 .m-tweets-container {
   margin-top:20px;
   max-width:700px;
+  border:1px solid #ccc;
+  border-top:0px;
   border-radius: 5px;
   overflow:hidden;
 }
@@ -9,10 +11,12 @@
   border:1px solid #ccc;
   border-radius: 0 0 5px 5px;
 }
+ 
 .m-tweets-container--toggler {
   padding:16px;
   background-color:#48AAE6;
   color:#fff;
+  font-size:1.3em;
   font-weight:bold;
   text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
   cursor:pointer;
@@ -21,10 +25,33 @@
   transition:opacity 150ms ease-in, color 200ms ease-in-out;
 }
 
+.m-tweets-container--preview {
+  padding:10px;
+  text-align:left;
+  border-radius:0 0 5px 5px;
+  overflow:hidden;
+  -webkit-box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.41);
+  -moz-box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.41);
+  box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.41);
+}
+
+.m-tweets-container--preview:after {
+  display:block;
+  content:"more";
+  font-weight:bold;
+  padding:10px;
+  margin:10px -10px -10px;
+  color:#222;
+  background:#ccc;
+  text-align:center;
+
+}
+
 .is-open .m-tweets-container--toggler {
   color:#ddd;
   opacity:0.8;
   text-shadow: 1px 1px 2px rgba(150, 150, 150, 0);
 }
 
-.is-closed .m-tweets-container--content {display:none;}
+.is-closed .m-tweets-container--content,
+.is-open .m-tweets-container--preview {display:none;}
