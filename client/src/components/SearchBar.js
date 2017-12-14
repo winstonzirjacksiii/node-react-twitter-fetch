@@ -13,7 +13,6 @@ class SearchBar extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    debugger;
     this.props.searchFunc(this.state.term);
   }
 

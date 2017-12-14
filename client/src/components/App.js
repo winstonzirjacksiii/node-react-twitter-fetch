@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import SearchBar from './SearchBar';
+import Tweet from './Tweet';
+
 import '../css/App.css';
 
 class App extends Component {
@@ -28,7 +30,10 @@ class App extends Component {
         <SearchBar searchFunc={this.searchForTweets.bind(this)} />
         
         <section className="Tweets">
-          { this.state.tweets.map((tweet, i) => <div key={i}>{tweet.text}</div>) }
+          { this.state.tweets.map((tweet) => {
+            const { id, text, user  } = tweet;
+            return <Tweet key={tweet.id } id={id} text={text} user={user} />;
+          }) }
         </section>
       </div>
     );

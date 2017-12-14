@@ -1,0 +1,27 @@
+.m-tweet {
+  overflow:hidden;
+  background:#fcfcfc;
+  max-width:700px;
+  outline:1px solid #ccc;
+  margin-left:auto;
+  margin-right:auto;
+}
+.m-tweet--user {
+  float:left;
+  width:20%;
+  padding:10px;
+}
+.m-tweet--user img {
+  display:block;
+  width:100%;border:100%;
+  overflow:hidden;
+  margin-bottom:10px;
+}
+.m-tweet--content {
+  float:left;
+  text-align:left;
+  width:80%;
+  padding:10px;
+}
+
+.m-tweet:nth-child(even) {background:#f1f1f1;}
