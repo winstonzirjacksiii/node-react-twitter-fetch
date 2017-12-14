@@ -1,8 +1,7 @@
 .m-tweet {
   overflow:hidden;
   background:#fcfcfc;
-  max-width:700px;
-  outline:1px solid #ccc;
+  border-top:1px solid #ccc;
   margin-left:auto;
   margin-right:auto;
 }
@@ -13,9 +12,10 @@
 }
 .m-tweet--user img {
   display:block;
-  width:100%;border:100%;
-  overflow:hidden;
-  margin-bottom:10px;
+  width:100%;
+  border-radius: 100%;
+  max-width: 70px;
+  margin: 0 auto 10px;
 }
 .m-tweet--content {
   float:left;
@@ -24,4 +24,5 @@
   padding:10px;
 }
 
+.m-tweet:nth-child(first) {border-top:0;}
 .m-tweet:nth-child(even) {background:#f1f1f1;}

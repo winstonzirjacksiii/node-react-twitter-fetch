@@ -4,7 +4,6 @@ import '../css/Tweet.css';
 class Tweet extends Component {
   render() {
     const {text, user} = this.props;
-    debugger;
     return (
       <div className="m-tweet">
         <div className="m-tweet--user">

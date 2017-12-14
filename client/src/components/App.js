@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from './SearchBar';
-import Tweet from './Tweet';
+import TweetsContainer from './TweetsContainer';
 
 import '../css/App.css';
 
@@ -27,14 +27,12 @@ class App extends Component {
           <h1 className="App-title">Tweet Lookup</h1>
           <h3 className="App-subtitle">using React, Node, and Firebase</h3>
         </header>
-        <SearchBar searchFunc={this.searchForTweets.bind(this)} />
-        
-        <section className="Tweets">
-          { this.state.tweets.map((tweet) => {
-            const { id, text, user  } = tweet;
-            return <Tweet key={tweet.id } id={id} text={text} user={user} />;
-          }) }
-        </section>
+        <div className="m-main">
+          <SearchBar searchFunc={this.searchForTweets.bind(this)} />
+          <section className="Tweets">
+            <TweetsContainer tweets={this.state.tweets}/>
+          </section>
+        </div>
       </div>
     );
   }

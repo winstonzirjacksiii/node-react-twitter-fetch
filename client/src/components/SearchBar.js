@@ -18,8 +18,8 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <form className="m-searchBar" onSubmit={this.handleSubmit}>
-        <input className="m-searchBar--input" 
+      <form className="m-search-bar" onSubmit={this.handleSubmit}>
+        <input className="m-search-bar--input" 
                placeholder="Search for tweets..." 
                onChange={(event)=>{this.setState({ term: event.target.value })}} />
       </form>

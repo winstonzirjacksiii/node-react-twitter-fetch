@@ -1,0 +1,7 @@
+.m-search-bar {margin-bottom:40px;}
+.m-search-bar--input {
+  height:42px;
+  padding:8px 16px;
+  border-radius:3px;
+  border: 1px solid #222;
+}
