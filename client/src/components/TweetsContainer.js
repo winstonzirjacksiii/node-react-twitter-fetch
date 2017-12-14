@@ -18,6 +18,7 @@ class TweetContainer extends Component {
   }
 
   render() {
+    const { term } = this.props;
     const tweets = this.props.tweets.map((tweet) => {
       const { id, text, user  } = tweet;
       return <Tweet key={tweet.id } id={id} text={text} user={user} />;
@@ -28,10 +29,10 @@ class TweetContainer extends Component {
       <aside className={"m-tweets-container" + isVisible}>
         <div className="m-tweets-container--toggler"
              onClick={this.toggleOpen.bind(this)}>
-            Tweets!
+            { term }
         </div>
         <div className="m-tweets-container--content">
-          {tweets}
+          { tweets }
         </div>
       </aside>
     )

@@ -8,7 +8,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      tweets: []
+      tweets: {}
     };
   }
 
@@ -16,11 +16,18 @@ class App extends Component {
     fetch('/search/'+ term)
     .then((res) => res.json())
     .then((resObj) => {
-      this.setState({ tweets: resObj.statuses });
+      const newState = Object.assign({}, this.state.tweets, {[term]: resObj.statuses});
+      debugger;
+      this.setState({ tweets: newState });
     });
   }
 
   render() {
+    const keys = Object.keys(this.state.tweets);
+    let tweetContainers = [];
+    if ( keys.length ) {
+      tweetContainers = keys.map((x, i) => <TweetsContainer key={i} term={x} tweets={this.state.tweets[x]} />);
+    }
     return (
       <div className="App">
         <header className="App-header">
@@ -30,7 +37,11 @@ class App extends Component {
         <div className="m-main">
           <SearchBar searchFunc={this.searchForTweets.bind(this)} />
           <section className="Tweets">
-            <TweetsContainer tweets={this.state.tweets}/>
+            { 
+              keys.length ? 
+              tweetContainers :
+              ""
+            }
           </section>
         </div>
       </div>
