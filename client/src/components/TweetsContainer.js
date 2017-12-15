@@ -32,7 +32,7 @@ class TweetContainer extends Component {
             { term }
         </div>
         <div className={"m-tweets-container--preview"}>
-          <b>{ preview.user_name}:</b> {preview.text}
+          <b>{ preview.user.name }:</b> {preview.text}
         </div>
         <div className="m-tweets-container--content">
           { tweets }

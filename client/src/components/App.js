@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import SearchBar from './SearchBar';
 import TweetsContainer from './TweetsContainer';
+import CurrentUser from './CurrentUser';
+import SignIn from './SignIn';
+import { auth, database } from '../firebase';
+
 
 import '../css/App.css';
 
@@ -8,8 +12,15 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      tweets: {}
+      tweets: {},
+      currentUser: null      
     };
+  }
+
+  componentDidMount() {
+    auth.onAuthStateChanged((currentUser) => {
+      this.setState({ currentUser });
+    });
   }
 
   searchForTweets(term){
@@ -22,7 +33,8 @@ class App extends Component {
   }
 
   render() {
-    const keys = Object.keys(this.state.tweets);
+    const { currentUser, tweets } = this.state;    
+    const keys = Object.keys(tweets);
     let tweetContainers = [];
     if ( keys.length ) {
       tweetContainers = keys.map((x, i) => <TweetsContainer key={i} 
@@ -37,14 +49,16 @@ class App extends Component {
           <h3 className="App-subtitle">using React, Node, and Firebase</h3>
         </header>
         <div className="m-main">
-          <SearchBar searchFunc={this.searchForTweets.bind(this)} />
-          <section className="Tweets">
-            { 
-              keys.length ? 
-              tweetContainers :
-              ""
-            }
-          </section>
+          { !currentUser && <SignIn /> }
+          { currentUser && 
+            <div>
+              <CurrentUser user={currentUser} />
+              <SearchBar searchFunc={this.searchForTweets.bind(this)} />
+              <section className="Tweets">
+                { !!keys.length && tweetContainers }
+              </section>
+            </div>
+          }
         </div>
       </div>
     );

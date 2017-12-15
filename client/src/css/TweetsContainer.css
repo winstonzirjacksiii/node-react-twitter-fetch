@@ -11,7 +11,7 @@
   border:1px solid #ccc;
   border-radius: 0 0 5px 5px;
 }
- 
+
 .m-tweets-container--toggler {
   padding:16px;
   background-color:#48AAE6;
@@ -37,7 +37,7 @@
 
 .m-tweets-container--preview:after {
   display:block;
-  content:"more";
+  content:"...";
   font-weight:bold;
   padding:10px;
   margin:10px -10px -10px;
