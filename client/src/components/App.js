@@ -13,13 +13,27 @@ class App extends Component {
     super();
     this.state = {
       tweets: {},
+      searches: [],
       currentUser: null      
     };
+
+    this.dbRef = null;
   }
 
-  componentDidMount() {
+  componentDidMount() {    
     auth.onAuthStateChanged((currentUser) => {
-      this.setState({ currentUser });
+      if (currentUser) {
+        this.dbRef = database.ref("Users").child(currentUser.uid+"/tweets");
+
+        this.dbRef.on('value', (snapshot) => {
+          this.setState({ tweets: snapshot.val() });
+        });
+
+        this.setState({ currentUser });
+      } else {
+        this.dbRef = null;
+        this.setState({ currentUser: null });
+      }
     });
   }
 
@@ -32,11 +46,23 @@ class App extends Component {
     });
   }
 
+  searchForTweetsFB(term){
+    return fetch('/search/'+ term)
+    .then((res) => res.json())
+    .then((resObj) => {
+      const newState = Object.assign({}, this.state.tweets, {[term]: resObj.statuses});
+      this.dbRef.push(newState);
+    });
+  }
+
   render() {
     const { currentUser, tweets } = this.state;    
-    const keys = Object.keys(tweets);
-    let tweetContainers = [];
-    if ( keys.length ) {
+    let tweetContainers = [],
+        keys = [];
+
+    if ( tweets ) {
+      keys = Object.keys(tweets);
+      debugger;
       tweetContainers = keys.map((x, i) => <TweetsContainer key={i} 
                                                             term={x} 
                                                             tweets={this.state.tweets[x]} 
@@ -53,7 +79,7 @@ class App extends Component {
           { currentUser && 
             <div>
               <CurrentUser user={currentUser} />
-              <SearchBar searchFunc={this.searchForTweets.bind(this)} />
+              <SearchBar searchFunc={this.searchForTweetsFB.bind(this)} />
               <section className="Tweets">
                 { !!keys.length && tweetContainers }
               </section>

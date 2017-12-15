@@ -9,7 +9,6 @@ class TweetContainer extends Component {
     this.state = {
       open: false
     }
-
   }
 
   toggleOpen(event) {
