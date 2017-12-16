@@ -23,10 +23,11 @@ class App extends Component {
   componentDidMount() {    
     auth.onAuthStateChanged((currentUser) => {
       if (currentUser) {
-        this.dbRef = database.ref("Users").child(currentUser.uid+"/tweets");
+        this.dbRef = database.ref("Users").child(`${currentUser.uid}/tweets/`);
 
         this.dbRef.on('value', (snapshot) => {
-          this.setState({ tweets: snapshot.val() });
+          const val = snapshot.val();
+          this.setState({ tweets: val });
         });
 
         this.setState({ currentUser });
@@ -37,36 +38,32 @@ class App extends Component {
     });
   }
 
-  searchForTweets(term){
+  searchForTweetsFB(term) {
     return fetch('/search/'+ term)
     .then((res) => res.json())
     .then((resObj) => {
-      const newState = Object.assign({}, this.state.tweets, {[term]: resObj.statuses});
-      this.setState({ tweets: newState });
-    });
-  }
-
-  searchForTweetsFB(term){
-    return fetch('/search/'+ term)
-    .then((res) => res.json())
-    .then((resObj) => {
-      const newState = Object.assign({}, this.state.tweets, {[term]: resObj.statuses});
+      const newState = Object.assign({}, this.state.tweets, {term, statuses: resObj.statuses});
       this.dbRef.push(newState);
     });
   }
 
+  deleteTweets(key) {
+    this.dbRef.child(key).remove();
+  }
+
   render() {
-    const { currentUser, tweets } = this.state;    
+    const { currentUser, tweets } = this.state;
     let tweetContainers = [],
         keys = [];
 
-    if ( tweets ) {
+    if ( tweets && Object.keys(tweets).length ) {
       keys = Object.keys(tweets);
-      debugger;
-      tweetContainers = keys.map((x, i) => <TweetsContainer key={i} 
-                                                            term={x} 
-                                                            tweets={this.state.tweets[x]} 
-                                                            preview={this.state.tweets[x][0]} />);
+      tweetContainers = keys.map((x, i) => <TweetsContainer key={x}
+                                                            containerId={x} 
+                                                            term={tweets[x].term} 
+                                                            tweets={tweets[x].statuses} 
+                                                            preview={tweets[x].statuses[0]} 
+                                                            deleteTweets={this.deleteTweets.bind(this)} /> );
     }
     return (
       <div className="App">

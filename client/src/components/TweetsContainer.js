@@ -16,6 +16,13 @@ class TweetContainer extends Component {
     this.setState({open: !this.state.open});
   }
 
+  handleDelete(event) {
+    const { deleteTweets, containerId } = this.props;
+    event.preventDefault();
+
+    deleteTweets(containerId);
+  }
+
   render() {
     const { term, preview } = this.props;
     const tweets = this.props.tweets.map((tweet) => {
@@ -29,6 +36,7 @@ class TweetContainer extends Component {
              onClick={this.toggleOpen.bind(this)}>
         <div className="m-tweets-container--toggler">
             { term }
+            <button className="m-tweets-container--delete" onClick={this.handleDelete.bind(this)}>&times;</button>
         </div>
         <div className={"m-tweets-container--preview"}>
           <b>{ preview.user.name }:</b> {preview.text}
