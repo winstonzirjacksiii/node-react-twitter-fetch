@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from './SearchBar';
-import TweetsContainer from './TweetsContainer';
+import Tweets from './Tweets';
 import CurrentUser from './CurrentUser';
 import SignIn from './SignIn';
 import { auth, database } from '../firebase';
@@ -65,19 +65,7 @@ class App extends Component {
 
   render() {
     const { currentUser, tweets } = this.state;
-    let tweetContainers = [],
-        keys = [];
 
-    if ( tweets && Object.keys(tweets).length ) {
-      keys = Object.keys(tweets);
-      tweetContainers = keys.map((x, i) => <TweetsContainer key={x}
-                                                            containerId={x} 
-                                                            term={tweets[x].term} 
-                                                            tweets={tweets[x].statuses} 
-                                                            preview={tweets[x].statuses[0]} 
-                                                            deleteTweets={this.deleteTweets.bind(this)} 
-                                                            updateTweets ={this.updateTweets.bind(this)}/> );
-    }
     return (
       <div className="App">
         <header className="App-header">
@@ -90,8 +78,10 @@ class App extends Component {
             <div>
               <CurrentUser user={currentUser} />
               <SearchBar searchFunc={this.searchForTweets.bind(this)} />
-              <section className="Tweets">
-                { !!keys.length && tweetContainers }
+              <section className="m-tweets">
+                <Tweets tweets={tweets}
+                        deleteTweets={this.deleteTweets.bind(this)}
+                        updateTweets={this.updateTweets.bind(this)} />
               </section>
             </div>
           }

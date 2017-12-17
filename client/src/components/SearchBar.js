@@ -12,6 +12,8 @@ class SearchBar extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    event.target.querySelector('.m-search-bar--input').value = "";
+
     this.setState({isLoading:true});    
     this.props.searchFunc(this.state.term).then((x) => {
       this.setState({isLoading: false});      
