@@ -61,3 +61,8 @@
 
 .is-closed .m-tweets-container--content,
 .is-open .m-tweets-container--preview {display:none;}
+
+.is-open .m-tweets-container--content {
+  max-height: 50vh;
+  overflow: auto;
+}
