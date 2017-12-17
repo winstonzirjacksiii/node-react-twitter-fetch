@@ -1,0 +1,17 @@
+.m-current-user {
+  position:absolute;
+  left:20px;
+  font-size:.8em;
+}
+
+.m-current-user--photo {
+  display:inline-block;
+  max-width:80px;
+  border-radius:100%;
+}
+
+.m-current-user--id {
+  display: inline-block;
+  padding-left: 20px;
+  text-align: left;
+}

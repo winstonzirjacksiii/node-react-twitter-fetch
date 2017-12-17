@@ -9,14 +9,38 @@ h1,h2,h3,h4,h5,h6 {
 .App {text-align: center;}
 
 .App-header {
+  position:relative;
   background-color: #222;
   height: 150px;
   padding: 20px;
   color: white;
+  padding-left:200px;
+  padding-right:200px;
 }
 
 .App-title {font-size: 1.5em;}
 .App-intro {font-size: large;}
 
-
 .m-main {padding:40px;}
+
+.m-btn {
+  display:inline-block;
+  padding:4px 10px;
+  color:#222;
+  background:#fff;
+  border-radius:3px;
+  border:1px solid #222;
+}
+
+.m-btn--delete,
+.m-btn--refresh {
+  background:transparent;
+  color:#fff;
+  border:0;
+}
+
+@media screen and (max-width:767px) {
+ .App-header {
+   padding-right:0;
+ }
+}

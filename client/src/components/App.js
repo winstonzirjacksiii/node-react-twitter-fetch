@@ -69,6 +69,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          { currentUser && <CurrentUser user={currentUser} /> }
           <h1 className="App-title">Tweet Lookup</h1>
           <h3 className="App-subtitle">using React, Node, and Firebase</h3>
         </header>
@@ -76,13 +77,10 @@ class App extends Component {
           { !currentUser && <SignIn /> }
           { currentUser && 
             <div>
-              <CurrentUser user={currentUser} />
               <SearchBar searchFunc={this.searchForTweets.bind(this)} />
-              <section className="m-tweets">
-                <Tweets tweets={tweets}
-                        deleteTweets={this.deleteTweets.bind(this)}
-                        updateTweets={this.updateTweets.bind(this)} />
-              </section>
+              <Tweets tweets={tweets}
+                      deleteTweets={this.deleteTweets.bind(this)}
+                      updateTweets={this.updateTweets.bind(this)} />
             </div>
           }
         </div>

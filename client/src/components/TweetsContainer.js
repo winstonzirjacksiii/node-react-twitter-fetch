@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Tweet from './Tweet';
+import FontAwesome from 'react-fontawesome';
 
 import '../css/TweetsContainer.css';
 
@@ -14,7 +15,7 @@ class TweetContainer extends Component {
 
   toggleOpen(event) {
     event.preventDefault();
-    this.setState({open: !this.state.open});
+    if (!event.target.classList.contains('m-tweet')) this.setState({open: !this.state.open});
   }
 
   handleDelete(event) {
@@ -29,7 +30,7 @@ class TweetContainer extends Component {
     const { updateTweets, containerId, term } = this.props;
     event.preventDefault();
     event.stopPropagation();
-    
+
     this.setState({isUpdating:true});    
     updateTweets(containerId, term).then((x) => {
       this.setState({isUpdating:false});      
@@ -42,21 +43,31 @@ class TweetContainer extends Component {
       const { id, text, user  } = tweet;
       return <Tweet key={tweet.id } id={id} text={text} user={user} />;
     });
-    const isVisible = this.state.open ? ' is-open' : ' is-closed';
+    const isOpen = this.state.open ? ' is-open' : ' is-closed';
 
     return (
-      <aside className={"m-tweets-container" + isVisible}
+      <aside className={"m-tweets-container" + isOpen}
              onClick={this.toggleOpen.bind(this)}>
-        <div className="m-tweets-container--toggler">
-            <button className="m-btn" onClick={this.handleUpdate.bind(this)}>Refresh</button>
-            { term }
-            <button className="m-btn m-btn--delete" onClick={this.handleDelete.bind(this)}>&times;</button>
-        </div>
-        <div className={"m-tweets-container--preview"}>
-          <b>{ preview.user.name }:</b> {preview.text}
-        </div>
-        <div className="m-tweets-container--content">
-          { tweets }
+        <div>
+          <div className="m-tweets-container--toggler">
+              <button className="m-btn m-btn--refresh" onClick={this.handleUpdate.bind(this)}>
+              <FontAwesome name='refresh'
+                           size='2x'
+                           style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }} />
+              </button>
+              { term }
+              <button className="m-btn m-btn--delete" onClick={this.handleDelete.bind(this)}>
+                <FontAwesome name='trash' 
+                             size='2x'
+                             style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }} />
+              </button>
+          </div>
+          <div className={"m-tweets-container--preview"}>
+            <b>{ preview.user.name }:</b> {preview.text}
+          </div>
+          <div className="m-tweets-container--content">
+            { tweets }
+          </div>
         </div>
       </aside>
     )

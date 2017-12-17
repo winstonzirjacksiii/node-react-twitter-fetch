@@ -1,10 +1,8 @@
 .m-tweets-container {
   margin-top:20px;
-  max-width:700px;
   border:1px solid #ccc;
   border-top:0px;
   border-radius: 5px;
-  overflow:hidden;
 }
 .m-tweets-container--content {
   display:block;
@@ -13,6 +11,7 @@
 }
 
 .m-tweets-container--toggler {
+  position:relative;
   padding:16px;
   background-color:#48AAE6;
   color:#fff;
@@ -30,9 +29,6 @@
   text-align:left;
   border-radius:0 0 5px 5px;
   overflow:hidden;
-  -webkit-box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.41);
-  -moz-box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.41);
-  box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.41);
 }
 
 .m-tweets-container--preview:after {
@@ -46,6 +42,16 @@
   text-align:center;
 
 }
+
+.m-btn--delete,
+.m-btn--refresh {
+  position:absolute;
+  top:50%;
+  -webkit-transform:translateY(-50%);
+  transform:translateY(-50%);
+}
+.m-btn--delete {left:20px;}
+.m-btn--refresh {right:20px;}
 
 .is-open .m-tweets-container--toggler {
   color:#ddd;

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import TweetsContainer from './TweetsContainer';
 
+import '../css/Tweets.css';
+
 class Tweets extends Component {
   render() {
     const { tweets, deleteTweets, updateTweets } = this.props;
@@ -18,9 +20,11 @@ class Tweets extends Component {
                                                             updateTweets={updateTweets} /> );
     }
     return (
-      <div className="m-tiles">
-        {tweetContainers}
-      </div>
+      <section className="m-tweets">
+        <div className="m-tiles">
+          {tweetContainers}
+        </div>
+      </section>
     );
   }
 }
