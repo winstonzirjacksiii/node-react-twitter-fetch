@@ -38,7 +38,7 @@ class App extends Component {
     });
   }
 
-  searchForTweetsFB(term) {
+  searchForTweets(term) {
     return fetch('/search/'+ term)
     .then((res) => res.json())
     .then((resObj) => {
@@ -76,7 +76,7 @@ class App extends Component {
           { currentUser && 
             <div>
               <CurrentUser user={currentUser} />
-              <SearchBar searchFunc={this.searchForTweetsFB.bind(this)} />
+              <SearchBar searchFunc={this.searchForTweets.bind(this)} />
               <section className="Tweets">
                 { !!keys.length && tweetContainers }
               </section>
