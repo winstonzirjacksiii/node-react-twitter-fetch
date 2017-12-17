@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 router.get('/:searchTerm', (req, res, next) => {
   var params = { 
     q: req.params.searchTerm,
-    count: 5 
+    count: 15 
   };
 
   getTweets(params, (request, response) => {

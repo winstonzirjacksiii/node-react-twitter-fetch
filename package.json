@@ -5,7 +5,7 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register --reporter spec",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log,./client/ --copy-files",
-    "start": "node dist/bin/www"
+    "start": "npm run build && node dist/bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -16,9 +16,10 @@
     "express": "~4.15.5",
     "express-rate-limit": "^2.11.0",
     "jade": "~1.11.0",
-    "mocha": "^4.0.1",    
+    "mocha": "^4.0.1",
     "morgan": "~1.9.0",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "twit": "^2.2.9"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
