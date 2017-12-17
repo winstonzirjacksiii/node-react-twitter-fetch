@@ -7,7 +7,8 @@ class TweetContainer extends Component {
   constructor(){
     super();
     this.state = {
-      open: false
+      open: false,
+      isUpdating: false
     }
   }
 
@@ -19,8 +20,20 @@ class TweetContainer extends Component {
   handleDelete(event) {
     const { deleteTweets, containerId } = this.props;
     event.preventDefault();
+    event.stopPropagation();
 
     deleteTweets(containerId);
+  }
+
+  handleUpdate(event) {
+    const { updateTweets, containerId, term } = this.props;
+    event.preventDefault();
+    event.stopPropagation();
+    
+    this.setState({isUpdating:true});    
+    updateTweets(containerId, term).then((x) => {
+      this.setState({isUpdating:false});      
+    });
   }
 
   render() {
@@ -35,8 +48,9 @@ class TweetContainer extends Component {
       <aside className={"m-tweets-container" + isVisible}
              onClick={this.toggleOpen.bind(this)}>
         <div className="m-tweets-container--toggler">
+            <button className="m-btn" onClick={this.handleUpdate.bind(this)}>Refresh</button>
             { term }
-            <button className="m-tweets-container--delete" onClick={this.handleDelete.bind(this)}>&times;</button>
+            <button className="m-btn m-btn--delete" onClick={this.handleDelete.bind(this)}>&times;</button>
         </div>
         <div className={"m-tweets-container--preview"}>
           <b>{ preview.user.name }:</b> {preview.text}

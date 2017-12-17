@@ -42,8 +42,20 @@ class App extends Component {
     return fetch('/search/'+ term)
     .then((res) => res.json())
     .then((resObj) => {
-      const newState = Object.assign({}, this.state.tweets, {term, statuses: resObj.statuses});
+      const newState = Object.assign({}, this.state.tweets, {statuses: resObj.statuses, term});
       this.dbRef.push(newState);
+    });
+  }
+
+  updateTweets(key, term) {
+    return fetch('/search/'+ term)
+    .then((res) => res.json())
+    .then((resObj) => {      
+      const opTweets = this.state.tweets[key];
+      const newTweets = [...resObj.statuses, ...opTweets.statuses];
+      const newState = Object.assign({}, this.state.tweets, {[key]:{statuses:newTweets, term}});
+
+      this.dbRef.update(newState);
     });
   }
 
@@ -63,7 +75,8 @@ class App extends Component {
                                                             term={tweets[x].term} 
                                                             tweets={tweets[x].statuses} 
                                                             preview={tweets[x].statuses[0]} 
-                                                            deleteTweets={this.deleteTweets.bind(this)} /> );
+                                                            deleteTweets={this.deleteTweets.bind(this)} 
+                                                            updateTweets ={this.updateTweets.bind(this)}/> );
     }
     return (
       <div className="App">
