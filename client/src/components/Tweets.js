@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TweetsContainer from './TweetsContainer';
+import PropTypes from 'prop-types';
 
 import '../css/Tweets.css';
 
@@ -27,6 +28,12 @@ class Tweets extends Component {
       </section>
     );
   }
+}
+
+Tweets.propTypes = {
+  tweets: PropTypes.array.isRequired, 
+  deleteTweets: PropTypes.func.isRequired, 
+  updateTweets: PropTypes.func.isRequired 
 }
 
 export default Tweets;

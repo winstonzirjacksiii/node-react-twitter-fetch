@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Tweet from './Tweet';
+import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 
 import '../css/TweetsContainer.css';
@@ -74,5 +75,14 @@ class TweetContainer extends Component {
     
   }
 }
+
+TweetContainer.propTypes = {
+  containerId: PropTypes.string.isRequired,
+  term: PropTypes.string.isRequired, 
+  tweets: PropTypes.array.isRequired, 
+  preview: PropTypes.object.isRequired, 
+  deleteTweets: PropTypes.func.isRequired, 
+  updateTweets: PropTypes.func.isRequired
+};
 
 export default TweetContainer;

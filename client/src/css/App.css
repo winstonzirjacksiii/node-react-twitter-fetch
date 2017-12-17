@@ -30,6 +30,7 @@ h1,h2,h3,h4,h5,h6 {
   background:#fff;
   border-radius:3px;
   border:1px solid #222;
+  cursor:pointer;cursor:hand;
 }
 
 .m-btn--delete,
@@ -39,8 +40,8 @@ h1,h2,h3,h4,h5,h6 {
   border:0;
 }
 
+.fa {cursor:pointer;cursor:hand;}
+
 @media screen and (max-width:767px) {
- .App-header {
-   padding-right:0;
- }
-}
+  .App-header {height:auto;padding-left:0;padding-right:0;}
+}  

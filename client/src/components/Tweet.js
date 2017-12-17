@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import '../css/Tweet.css';
 
 class Tweet extends Component {
@@ -15,6 +17,11 @@ class Tweet extends Component {
       </div>
     );
   }
+}
+
+Tweet.propTypes = {
+  text: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired
 }
 
 export default Tweet;

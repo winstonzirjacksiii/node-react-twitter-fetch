@@ -1,6 +1,7 @@
 .m-current-user {
   position:absolute;
-  left:20px;
+  right:20px;
+  top:18px;
   font-size:.8em;
 }
 
@@ -13,5 +14,15 @@
 .m-current-user--id {
   display: inline-block;
   padding-left: 20px;
-  text-align: left;
+  text-align: right;
+}
+
+@media screen and (max-width:767px) {
+  .m-current-user {
+    display:block;
+    position:static;
+    margin:10px auto 0;
+  }
+  .m-current-user--photo {display:none;}
+  .m-current-user--id {padding:0 0 10px 0;text-align:center;}
 }
