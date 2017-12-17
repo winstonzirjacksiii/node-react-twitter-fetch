@@ -4,11 +4,20 @@ import favicon from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import RateLimit from 'express-rate-limit';
 
 const index = require('./routes/index');
 const search = require('./routes/search');
 
 const app = express();
+
+const limiter = new RateLimit({
+  windowMs: 15*60*1000,
+  max: 100, 
+  delayAfter: 10, 
+  delayMs: 3*1000, 
+  message: "Too many requests from this IP, please try again after fifteen minutes."
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +30,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(limiter);
 
 app.use('/search', search);
 
