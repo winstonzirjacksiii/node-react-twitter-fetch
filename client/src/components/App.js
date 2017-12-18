@@ -27,10 +27,8 @@ class App extends Component {
 
         this.dbRef.on('value', (snapshot) => {
           const val = snapshot.val();
-          this.setState({ tweets: val });
+          this.setState({ currentUser, tweets: val });
         });
-
-        this.setState({ currentUser });
       } else {
         this.dbRef = null;
         this.setState({ currentUser: null, tweets: {} });
@@ -39,7 +37,7 @@ class App extends Component {
   }
 
   searchForTweets(term) {
-    return fetch(`https://react-twitter-lookup-backend.herokuapp.com/search/${term}`)
+    return fetch(`/search/${term}`)
     .then((res) => res.json())
     .then((resObj) => {
       const newState = Object.assign({}, this.state.tweets, {statuses: resObj.statuses, term});
@@ -48,7 +46,7 @@ class App extends Component {
   }
 
   updateTweets(key, term) {
-    return fetch(`https://react-twitter-lookup-backend.herokuapp.com/search/${term}`)
+    return fetch(`/search/${term}`)
     .then((res) => res.json())
     .then((resObj) => {      
       const opTweets = this.state.tweets[key];
