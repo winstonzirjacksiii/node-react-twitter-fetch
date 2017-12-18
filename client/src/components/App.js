@@ -33,7 +33,7 @@ class App extends Component {
         this.setState({ currentUser });
       } else {
         this.dbRef = null;
-        this.setState({ currentUser: null });
+        this.setState({ currentUser: null, tweets: {} });
       }
     });
   }
