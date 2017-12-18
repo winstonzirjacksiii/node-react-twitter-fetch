@@ -31,7 +31,7 @@ class Tweets extends Component {
 }
 
 Tweets.propTypes = {
-  tweets: PropTypes.array.isRequired, 
+  tweets: PropTypes.object.isRequired, 
   deleteTweets: PropTypes.func.isRequired, 
   updateTweets: PropTypes.func.isRequired 
 }

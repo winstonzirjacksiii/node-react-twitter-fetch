@@ -1,0 +1,35 @@
+.m-loading {
+  position:absolute;
+  top:0;bottom:0;
+  left:0;right:0;
+  overflow:hidden;
+}
+
+.m-loading:before {
+  position:absolute;
+  content:"";
+  top:0;left:0;
+  height:100%;
+  width:100%;
+  background:#666;
+  opacity:0.42;
+}
+
+.m-loading--center {
+  position:relative;
+  top:0;left:0;
+  height:100%;
+  width:100%;
+  margin-top:-20px;
+  margin-left:-20px;
+}
+
+.m-loading .fa {
+  position:absolute;
+  top:50%;
+  left:50%;
+  z-index:1;
+  color:#fff;
+  -webkit-transform:translate(-50%,-50%);
+  transform:translate(-50%,-50%);
+}

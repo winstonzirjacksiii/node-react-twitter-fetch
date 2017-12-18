@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Tweet from './Tweet';
+import Loading from './Loading';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 
@@ -45,6 +46,22 @@ class TweetContainer extends Component {
       return <Tweet key={tweet.id } id={id} text={text} user={user} />;
     });
     const isOpen = this.state.open ? ' is-open' : ' is-closed';
+    let mainContent;
+
+    if (tweets.length) {
+      mainContent = (
+        <div>
+          <div className={"m-tweets-container--preview"}>
+            <b>{ preview.user.name }:</b> {preview.text}
+          </div>
+          <div className="m-tweets-container--content">
+            { tweets }
+          </div>
+        </div>
+      );
+    } else {
+      mainContent = ( <div className="m-tweets-container--empty">No tweets found - we got nothing.</div> );  
+    }
 
     return (
       <aside className={"m-tweets-container" + isOpen}
@@ -63,16 +80,13 @@ class TweetContainer extends Component {
                              style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }} />
               </button>
           </div>
-          <div className={"m-tweets-container--preview"}>
-            <b>{ preview.user.name }:</b> {preview.text}
-          </div>
-          <div className="m-tweets-container--content">
-            { tweets }
+          <div className="m-tweets-container--main">
+            { mainContent }
+            { this.state.isUpdating && <Loading /> }
           </div>
         </div>
       </aside>
-    )
-    
+    );
   }
 }
 
@@ -80,7 +94,7 @@ TweetContainer.propTypes = {
   containerId: PropTypes.string.isRequired,
   term: PropTypes.string.isRequired, 
   tweets: PropTypes.array.isRequired, 
-  preview: PropTypes.object.isRequired, 
+  preview: PropTypes.object, 
   deleteTweets: PropTypes.func.isRequired, 
   updateTweets: PropTypes.func.isRequired
 };

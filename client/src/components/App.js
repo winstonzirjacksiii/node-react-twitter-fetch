@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   searchForTweets(term) {
-    return fetch('/search/'+ term)
+    return fetch(`https://react-twitter-lookup-backend.herokuapp.com/search/${term}`)
     .then((res) => res.json())
     .then((resObj) => {
       const newState = Object.assign({}, this.state.tweets, {statuses: resObj.statuses, term});
@@ -48,7 +48,7 @@ class App extends Component {
   }
 
   updateTweets(key, term) {
-    return fetch('/search/'+ term)
+    return fetch(`https://react-twitter-lookup-backend.herokuapp.com/search/${term}`)
     .then((res) => res.json())
     .then((resObj) => {      
       const opTweets = this.state.tweets[key];
@@ -75,13 +75,13 @@ class App extends Component {
         </header>
         <div className="m-main">
           { !currentUser && <SignIn /> }
-          { currentUser && 
-            <div>
-              <SearchBar searchFunc={this.searchForTweets.bind(this)} />
-              <Tweets tweets={tweets}
+          { currentUser &&
+            <SearchBar searchFunc={this.searchForTweets.bind(this)} />
+          }
+          { tweets &&
+            <Tweets tweets={tweets}
                       deleteTweets={this.deleteTweets.bind(this)}
                       updateTweets={this.updateTweets.bind(this)} />
-            </div>
           }
         </div>
       </div>

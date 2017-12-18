@@ -1,6 +1,6 @@
 .m-tiles {
   -webkit-flex-direction:column-reverse;
-  flex-direction:column-reverse;
+  flex-direction:row-reverse;
   -webkit-column-count: 3;
   column-count: 3;
   -webkit-column-gap: 1.5rem;
