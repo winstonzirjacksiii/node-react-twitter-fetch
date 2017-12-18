@@ -9,7 +9,7 @@ class Tweet extends Component {
     return (
       <div className="m-tweet">
         <div className="m-tweet--user">
-          <img src={user.profile_image_url} alt={user.screen_name} />
+          <img src={user.profile_image_url_https} alt={user.screen_name} />
           <h4>{user.name}</h4>
           <h5>({user.screen_name})</h5>
         </div>
